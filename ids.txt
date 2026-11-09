@@ -1,0 +1,18 @@
+1st terminal-
+sudo apt install -y snort
+snort -V
+ip -br addr
+sudo snort -T -c /etc/snort/snort.conf
+sudo nano /etc/snort/rules/local.rules
+alert icmp any any -> any any (msg:"ICMP Ping Detected"; sid:1000001; rev:1;)
+sudo snort -T -c /etc/snort/snort.conf
+sudo snort -A console -q -c /etc/snort/snort.conf -i eth0
+
+
+
+
+2nd terminal- 
+ping 8.8.8.8
+
+
+

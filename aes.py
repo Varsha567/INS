@@ -1,17 +1,10 @@
-from cryptography.hazmat.primitives.ciphers.aead import AESGCM
-import os
-
-key = AESGCM.generate_key(bit_length=256)
-
-aes = AESGCM(key)
-
-nonce = os.urandom(12)
-
-data = b"Hello, AES!"
-
-ciphertext = aes.encrypt(nonce, data, None)
-
-plaintext = aes.decrypt(nonce, ciphertext, None)
-
-print("Cipher Text:", ciphertext)
-print("Decrypted Text:", plaintext)
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad, unpad
+key=b"1234567890123456"
+cipher=AES.new(key, AES.MODE_ECB)
+plaintext=input("Enter text: ")
+encrypted=cipher.encrypt(pad(plaintext.encode(), AES.block_size))
+print("Encrypted text:", encrypted.hex())
+decipher=AES.new(key, AES.MODE_ECB)
+decrypted=unpad(decipher.decrypt(encrypted), AES.block_size)
+print("Decrpted Text:", decrypted.decode())

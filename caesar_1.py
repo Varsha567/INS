@@ -1,17 +1,35 @@
-def ceaser(text,s):
-    result=""
-    for ch in text:
-        if ch.isupper():
-            result+=chr((ord(ch)-65+s)%26+65)
-        elif ch.islower():
-            result+=chr((ord(ch)-97+s)%26+97)
-        else:
-            result+=ch
-    return result # Added return statement
+def caesar_cipher(text, shift, mode="encrypt"):
+  result = ""
 
-plain_text="hello"
-s=3
-ciper=ceaser(plain_text,s)
-plain=ceaser(ciper,-s)
-print(ciper)
-print(plain)
+ 
+  for char in text:
+
+    if char.isalpha():
+
+      if char.isupper():
+        base = ord("A")  
+      else:
+        base = ord("a")  
+      if mode == "encrypt":
+        s = shift 
+      else:
+        s = -shift  
+      shifted_index = (ord(char) - base + s) % 26
+      new_char = chr(shifted_index + base)
+
+      result += new_char
+
+    else:
+     
+      result += char
+
+  return result
+
+encrypted = caesar_cipher("HELLO VIVA", 3, "encrypt")
+print("Encrypted:", encrypted)  # Output: KHOOR YLYD
+
+decrypted = caesar_cipher(encrypted, 3, "decrypt")
+print("Decrypted:", decrypted)  # Output: HELLO VIVA
+
+
+    
